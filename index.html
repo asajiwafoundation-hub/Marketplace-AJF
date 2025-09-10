@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace Asa Jiwa Foundation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4facfe;
+      --secondary-color: #0077b6;
+      --accent-color: #00b4d8;
+      --light-color: #f8f9fa;
+      --dark-color: #333;
+      --success-color: #28a745;
+      --danger-color: #dc3545;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: var(--dark-color);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    nav {
+      background: var(--secondary-color);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      position: relative;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s;
+    }
+    
+    nav a:hover:after {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: #ffd700;
+    }
+    
+    nav a.active:after {
+      width: 100%;
+      background-color: #ffd700;
+    }
+    
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    
+    .page {
+      display: none;
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary-color);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* Home Page */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://z-cdn-media.chatglm.cn/files/7414c511-94b8-4fcd-9f22-cdb18ff0ded8_0aa4dbe7f6c9fb6c09650418947bef04.jpg?auth_key=1789048771-bdaf3e20835e46bf9d5e912eb8fa026b-0-42b88a8ad63ccf366d6e82487377a7e8');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      background: var(--primary-color);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .cta-button:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .feature {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .feature:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .feature h3 {
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    /* Products Page */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .product {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .product:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+    
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .product h3 {
+      margin: 15px 0 10px;
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+    }
+    
+    .product p {
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .product button {
+      background: var(--primary-color);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .product button:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    
+    /* Cart Page */
+    .cart-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      padding: 30px;
+    }
+    
+    .cart-items {
+      margin-bottom: 30px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      gap: 20px;
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    
+    .cart-item-details {
+      flex: 1;
+    }
+    
+    .cart-item-details h4 {
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+    
+    .cart-item-details p {
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .quantity-control button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .quantity-control button:hover {
+      background: var(--secondary-color);
+    }
+    
+    .remove-btn {
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .remove-btn:hover {
+      background: #c82333;
+    }
+    
+    .cart-summary {
+      background: var(--light-color);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    
+    .cart-summary h3 {
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      text-align: right;
+      font-size: 1.5rem;
+    }
+    
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    
+    .cart-actions button {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .continue-shopping {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .continue-shopping:hover {
+      background: #5a6268;
+    }
+    
+    .checkout-btn {
+      background: var(--success-color);
+      color: white;
+    }
+    
+    .checkout-btn:hover {
+      background: #218838;
+    }
+    
+    /* Checkout Page */
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    .checkout-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .checkout-form .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .checkout-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    
+    .checkout-form input, .checkout-form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .checkout-form input:focus, .checkout-form textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+      outline: none;
+    }
+    
+    .order-summary {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      height: fit-content;
+    }
+    
+    .order-summary h3 {
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-color);
+    }
+    
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .order-item:last-child {
+      border-bottom: none;
+    }
+    
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--secondary-color);
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid var(--light-color);
+    }
+    
+    .place-order-btn {
+      background: var(--primary-color);
+      border: none;
+      padding: 15px 25px;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .place-order-btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    
+    .bank-info {
+      background: #e6f7ff;
+      border: 1px solid var(--secondary-color);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      display: none;
+    }
+    
+    .bank-info h3 {
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .bank-info p {
+      margin-bottom: 10px;
+    }
+    
+    .bank-info b {
+      color: var(--secondary-color);
+    }
+    
+    .queue-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--danger-color);
+      margin: 15px 0;
+      padding: 10px;
+      background: white;
+      display: inline-block;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .bank-info button {
+      background: #25D366;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .bank-info button:hover {
+      background: #128C7E;
+      transform: translateY(-3px);
+    }
+    
+    /* Contact Page */
+    .contact-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .contact-item {
+      padding: 20px;
+      border-radius: 10px;
+      background: var(--light-color);
+      transition: transform 0.3s;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .contact-item i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .contact-item h3 {
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+    
+    .contact-item a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .contact-item a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+    
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 40px;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--success-color);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transform: translateX(150%);
+      transition: transform 0.3s;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 50px;
+      color: #888;
+    }
+    
+    .empty-cart i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cart-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-store"></i> Marketplace Asa Jiwa Foundation</h1>
+    <p>Belanja atribut resmi dan produk kesehatan mental</p>
+  </header>
+  
+  <nav>
+    <a class="nav-link active" onclick="showPage('home')"><i class="fas fa-home"></i> Beranda</a>
+    <a class="nav-link" onclick="showPage('products')"><i class="fas fa-box"></i> Produk</a>
+    <a class="nav-link" onclick="showPage('cart')"><i class="fas fa-shopping-cart"></i> Keranjang</a>
+    <a class="nav-link" onclick="showPage('checkout')"><i class="fas fa-credit-card"></i> Checkout</a>
+    <a class="nav-link" onclick="showPage('contact')"><i class="fas fa-phone"></i> Kontak</a>
+  </nav>
+  
+  <div class="container">
+    <!-- Home Page -->
+    <div id="home" class="page active">
+      <div class="hero">
+        <h2>Selamat Datang di Marketplace Asa Jiwa Foundation</h2>
+        <p>Dapatkan berbagai produk berkualitas untuk mendukung program kesehatan mental dan pemberdayaan masyarakat</p>
+        <div class="cta-buttons">
+          <a href="#" class="cta-button" onclick="showPage('products')">
+            <i class="fas fa-shopping-bag"></i> Belanja Sekarang
+          </a>
+          <a href="#" class="cta-button" onclick="showPage('contact')">
+            <i class="fas fa-info-circle"></i> Hubungi Kami
+          </a>
+        </div>
+      </div>
+      
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-heart"></i>
+          <h3>Kesehatan Mental</h3>
+          <p>Dukung program kesehatan mental dengan membeli e-book dan merchandise edukatif</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Pendidikan</h3>
+          <p>Dapatkan berbagai atribut pendidikan untuk mendukung program beasiswa kami</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-hand-holding-heart"></i>
+          <h3>Pemberdayaan</h3>
+          <p>Setiap pembelian Anda mendukung pemberdayaan masyarakat Indonesia</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Products Page -->
+    <div id="products" class="page">
+      <h2 class="section-title">Produk Kami</h2>
+      <div class="products">
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/7414c511-94b8-4fcd-9f22-cdb18ff0ded8_0aa4dbe7f6c9fb6c09650418947bef04.jpg?auth_key=1789048771-bdaf3e20835e46bf9d5e912eb8fa026b-0-42b88a8ad63ccf366d6e82487377a7e8" alt="Slempang">
+          <h3>Slempang</h3>
+          <p>Rp 95.000</p>
+          <button onclick="addToCart('Slempang', 95000, 'https://z-cdn-media.chatglm.cn/files/7414c511-94b8-4fcd-9f22-cdb18ff0ded8_0aa4dbe7f6c9fb6c09650418947bef04.jpg?auth_key=1789048771-bdaf3e20835e46bf9d5e912eb8fa026b-0-42b88a8ad63ccf366d6e82487377a7e8')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/4f21748f-24b9-408e-80ee-e3572428ddb7_2a6b3455abfc6d8761a3122da4941abe.jpg?auth_key=1789048771-6211164160c34f0282bfbbfd66a964fa-0-8c0b1cbd00bc9e81fa95c437d51628e6" alt="ID Card">
+          <h3>ID Card</h3>
+          <p>Rp 25.000</p>
+          <button onclick="addToCart('ID Card', 25000, 'https://z-cdn-media.chatglm.cn/files/4f21748f-24b9-408e-80ee-e3572428ddb7_2a6b3455abfc6d8761a3122da4941abe.jpg?auth_key=1789048771-6211164160c34f0282bfbbfd66a964fa-0-8c0b1cbd00bc9e81fa95c437d51628e6')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/eaa138b9-3e60-4269-911e-a3684ac8cec6_73f122987af5d39310bb4c6d06742b9a.jpg?auth_key=1789048771-ad49bdd51d8f4154a4916bf05e4b3842-0-85baea28d0a082dcef3543da915deb79" alt="Kaos">
+          <h3>Kaos</h3>
+          <p>Rp 55.000</p>
+          <button onclick="addToCart('Kaos', 55000, 'https://z-cdn-media.chatglm.cn/files/eaa138b9-3e60-4269-911e-a3684ac8cec6_73f122987af5d39310bb4c6d06742b9a.jpg?auth_key=1789048771-ad49bdd51d8f4154a4916bf05e4b3842-0-85baea28d0a082dcef3543da915deb79')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/20d9eb72-7d91-4f43-8f7e-27b394ec0fe1_6c25bd51c2653b20e027620e6d5a141e.jpg?auth_key=1789048771-ff034588b0f14b1894052253105d7ff8-0-f75ca8e46ae1023891982c8d1be9a93" alt="Lanyard">
+          <h3>Lanyard</h3>
+          <p>Rp 15.000</p>
+          <button onclick="addToCart('Lanyard', 15000, 'https://z-cdn-media.chatglm.cn/files/20d9eb72-7d91-4f43-8f7e-27b394ec0fe1_6c25bd51c2653b20e027620e6d5a141e.jpg?auth_key=1789048771-ff034588b0f14b1894052253105d7ff8-0-f75ca8e46ae1023891982c8d1be9a93')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/7c71cf25-7c9c-4830-a090-de5ea21592ba_06afada26d014b223137e50d30f9002d.jpg?auth_key=1789048771-d2adf89ecf2e4f18aa360c477a904c7c-0-f31936effa2745f7e07b7c8adb7eed3c" alt="Merchandise Lengkap">
+          <h3>Merchandise Lengkap</h3>
+          <p>Rp 175.000</p>
+<button onclick="addToCart('Merchandise Lengkap', 175000, 'https://z-cdn-media.chatglm.cn/files/7c71cf25-7c9c-4830-a090-de5ea21592ba_06afada26d014b223137e50d30f9002d.jpg?auth_key=1789048771-d2adf89ecf2e4f18aa360c477a904c7c-0-f31936effa2745f7e07b7c8adb7eed3c')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/4c5c4fb0-70f7-4005-913b-2e450153765c_0501cb18b2368f2cc637c68dbe3d0365.jpg?auth_key=1789048771-31ed114021d34be4a35ccd139d19d34c-0-0594a6a741bb0e7b2c1bea109254b83a" alt="E-book Kesehatan Mental">
+          <h3>E-book Kesehatan Mental</h3>
+          <p>Rp 20.000</p>
+          <button onclick="addToCart('E-book Kesehatan Mental', 20000, 'https://z-cdn-media.chatglm.cn/files/4c5c4fb0-70f7-4005-913b-2e450153765c_0501cb18b2368f2cc637c68dbe3d0365.jpg?auth_key=1789048771-31ed114021d34be4a35ccd139d19d34c-0-0594a6a741bb0e7b2c1bea109254b83a')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="product">
+          <img src="https://z-cdn-media.chatglm.cn/files/24e6ce44-9deb-48dd-88b1-ea636458b146_ed1228b531b9875cd48132f98ea53efc.jpg?auth_key=1789048771-5466cc468b234703b9b684a73906e017-0-679bdb24c92fb122bceb7f1994bc06aa" alt="Totebag">
+          <h3>Totebag</h3>
+          <p>Rp 25.000</p>
+          <button onclick="addToCart('Totebag', 25000, 'https://z-cdn-media.chatglm.cn/files/24e6ce44-9deb-48dd-88b1-ea636458b146_ed1228b531b9875cd48132f98ea53efc.jpg?auth_key=1789048771-5466cc468b234703b9b684a73906e017-0-679bdb24c92fb122bceb7f1994bc06aa')">
+            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cart Page -->
+    <div id="cart" class="page">
+      <h2 class="section-title">Keranjang Belanja</h2>
+      <div class="cart-container">
+        <div class="cart-items" id="cartItems">
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Keranjang masih kosong</h3>
+            <p>Silakan tambahkan produk terlebih dahulu</p>
+            <button class="cta-button" onclick="showPage('products')" style="margin-top: 20px;">
+              <i class="fas fa-arrow-left"></i> Kembali ke Produk
+            </button>
+          </div>
+        </div>
+        <div class="cart-summary" id="cartSummary" style="display: none;">
+          <h3 id="cartTotal">Total: Rp 0</h3>
+          <div class="cart-actions">
+            <button class="continue-shopping" onclick="showPage('products')">
+              <i class="fas fa-arrow-left"></i> Lanjutkan Belanja
+            </button>
+            <button class="checkout-btn" onclick="showPage('checkout')">
+              <i class="fas fa-credit-card"></i> Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Checkout Page -->
+<div id="checkout" class="page">
+      <h2 class="section-title">Checkout</h2>
+      <div class="checkout-container">
+        <div class="checkout-form">
+          <h3>Informasi Pembeli</h3>
+          <form onsubmit="checkout(event)">
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
+            <div class="form-group">
+              <label for="address">Alamat Lengkap</label>
+              <input type="text" id="address" placeholder="Masukkan alamat lengkap Anda" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Nomor WhatsApp</label>
+              <input type="tel" id="phone" placeholder="Masukkan nomor WhatsApp aktif Anda" required>
+            </div>
+            <div class="form-group">
+              <label for="notes">Catatan tambahan (opsional)</label>
+              <textarea id="notes" placeholder="Masukkan catatan tambahan jika ada" rows="3"></textarea>
+            </div>
+            <button type="submit" class="place-order-btn">
+              <i class="fas fa-money-check-alt"></i> Proses Pesanan
+            </button>
+          </form>
+          <div id="paymentInfo" class="bank-info"></div>
+        </div>
+        
+        <div class="order-summary">
+          <h3>Ringkasan Pesanan</h3>
+          <div id="orderItems">
+            <p style="text-align: center; color: #888;">Tidak ada produk di keranjang</p>
+          </div>
+          <div class="order-total">
+            <span>Total:</span>
+            <span id="orderTotal">Rp 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+      <h2 class="section-title">Kontak Kami</h2>
+      <div class="contact-container">
+        <p>Hubungi kami untuk informasi lebih lanjut mengenai produk dan program Asa Jiwa Foundation</p>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+<a href="mailto:asajiwafoundation@gmail.com">asajiwafoundation@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
+            <a href="https://wa.me/6282228575526" target="_blank">+62 822-2857-5526</a>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-instagram"></i>
+            <h3>Instagram</h3>
+            <a href="https://instagram.com/asajiwa.id" target="_blank">@asajiwa.id</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Asa Jiwa Foundation | Marketplace Internal</p>
+  </footer>
+  
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificationText">Produk berhasil ditambahkan ke keranjang!</span>
+  </div>
+  
+  <script>
+    let cart = [];
+    let orderCounter = localStorage.getItem("orderCounter") || 1;
+    
+    function showNotification(message) {
+      const notification = document.getElementById("notification");
+      const notificationText = document.getElementById("notificationText");
+      
+      notificationText.textContent = message;
+      notification.classList.add("show");
+      
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 3000);
+    }
+    
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      // Remove active class from all nav links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+
+// Show selected page
+      document.getElementById(pageId).classList.add('active');
+      
+      // Add active class to clicked nav link
+      event.target.classList.add('active');
+      
+      // Update order summary if checkout page
+      if (pageId === 'checkout') {
+        updateOrderSummary();
+      }
+    }
+    
+    function addToCart(product, price, image) {
+      let item = cart.find(i => i.product === product);
+      if (item) { 
+        item.qty++; 
+        showNotification(`Jumlah ${product} berhasil diperbarui di keranjang!`);
+      } else { 
+        cart.push({ product, price, qty: 1, image }); 
+        showNotification(`${product} berhasil ditambahkan ke keranjang!`);
+      }
+      renderCart();
+    }
+    
+    function removeFromCart(product) {
+      cart = cart.filter(i => i.product !== product);
+      renderCart();
+      showNotification(`${product} berhasil dihapus dari keranjang!`);
+    }
+    
+    function updateQuantity(product, change) {
+      let item = cart.find(i => i.product === product);
+      if (item) {
+        item.qty += change;
+        if (item.qty <= 0) {
+          removeFromCart(product);
+        } else {
+          renderCart();
+        }
+      }
+    }
+    
+    function renderCart() {
+      let cartItems = document.getElementById("cartItems");
+      let cartSummary = document.getElementById("cartSummary");
+      let total = 0;
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Keranjang masih kosong</h3>
+<p>Silakan tambahkan produk terlebih dahulu</p>
+            <button class="cta-button" onclick="showPage('products')" style="margin-top: 20px;">
+              <i class="fas fa-arrow-left"></i> Kembali ke Produk
+            </button>
+          </div>
+        `;
+        cartSummary.style.display = "none";
+      } else {
+        cartItems.innerHTML = "";
+        cart.forEach(item => {
+          let subtotal = item.price * item.qty;
+          total += subtotal;
+          cartItems.innerHTML += `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.product}">
+              <div class="cart-item-details">
+                <h4>${item.product}</h4>
+                <p>Harga: Rp ${item.price.toLocaleString('id-ID')}</p>
+                <p>Subtotal: Rp ${subtotal.toLocaleString('id-ID')}</p>
+              </div>
+              <div class="cart-item-actions">
+                <div class="quantity-control">
+                  <button onclick="updateQuantity('${item.product}', -1)">-</button>
+                  <span>${item.qty}</span>
+                  <button onclick="updateQuantity('${item.product}', 1)">+</button>
+                </div>
+                <button class="remove-btn" onclick="removeFromCart('${item.product}')">
+                  <i class="fas fa-trash"></i> Hapus
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        
+        document.getElementById("cartTotal").innerText = "Total: Rp " + total.toLocaleString('id-ID');
+        cartSummary.style.display = "block";
+      }
+    }
+    
+    function updateOrderSummary() {
+      let orderItems = document.getElementById("orderItems");
+      let orderTotal = document.getElementById("orderTotal");
+      let total = 0;
+      
+      if (cart.length === 0) {
+        orderItems.innerHTML = "<p style='text-align: center; color: #888;'>Tidak ada produk di keranjang</p>";
+      } else {
+        orderItems.innerHTML = "";
+        cart.forEach(item => {
+          let subtotal = item.price * item.qty;
+          total += subtotal;
+          orderItems.innerHTML += `
+<div class="order-item">
+              <span>${item.product} x${item.qty}</span>
+              <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+            </div>
+          `;
+        });
+      }
+      
+      orderTotal.textContent = "Rp " + total.toLocaleString('id-ID');
+    }
+    
+    function checkout(event) {
+      event.preventDefault();
+      
+      if (cart.length === 0) {
+        showNotification("Keranjang masih kosong! Silakan tambahkan produk terlebih dahulu.");
+        return;
+      }
+      
+      let name = document.getElementById("name").value;
+      let address = document.getElementById("address").value;
+      let phone = document.getElementById("phone").value;
+      let notes = document.getElementById("notes").value;
+      let total = cart.reduce((t, i) => t + i.price * i.qty, 0);
+      
+      // Buat nomor antrian (A001, A002, dst)
+      let queueNumber = "A" + String(orderCounter).padStart(3, '0');
+      localStorage.setItem("orderCounter", ++orderCounter);
+      
+      let orderText = `Halo Admin Asa Jiwa Foundation, saya ingin konfirmasi pesanan.\n\nNo Antrian: ${queueNumber}\n\n`;
+      cart.forEach(item => {
+        orderText += `- ${item.product} x${item.qty} = Rp ${(item.price*item.qty).toLocaleString('id-ID')}\n`;
+      });
+      orderText += `\nTotal: Rp ${total.toLocaleString('id-ID')}\n\n`;
+      orderText += `Nama: ${name}\nAlamat: ${address}\nWhatsApp: ${phone}\nCatatan: ${notes}`;
+      
+      document.getElementById("paymentInfo").style.display = "block";
+      document.getElementById("paymentInfo").innerHTML = `
+        <h3><i class="fas fa-money-check-alt"></i> Instruksi Pembayaran</h3>
+        <p>No Antrian Anda: <span class="queue-number">${queueNumber}</span></p>
+        <p>Silakan transfer total pembayaran ke rekening berikut:</p>
+        <p><b>Bank:</b> SeaBank Indonesia</p>
+        <p><b>No Rekening:</b> 901744779449</p>
+        <p><b>Atas Nama:</b> Asa Jiwa Foundation</p>
+        <p><b>Total:</b> Rp ${total.toLocaleString('id-ID')}</p>
+        <p>Setelah transfer, konfirmasi via WhatsApp Admin dengan menyertakan bukti pembayaran:</p>
+        <a href="https://wa.me/6282228575526?text=${encodeURIComponent(orderText)}" target="_blank">
+          <button>
+            <i class="fab fa-whatsapp"></i> Konfirmasi via WhatsApp
+          </button>
+        </a>
+      `;
+// Scroll to payment info
+      document.getElementById("paymentInfo").scrollIntoView({ behavior: 'smooth' });
+      
+      // Show notification
+      showNotification("Pesanan berhasil dibuat! Silakan lakukan pembayaran.");
+    }
+    
+    // Initialize cart on page load
+    renderCart();
+  </script>
+</body>
+</html>
